@@ -1,0 +1,95 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "stack : build",
+      "type": "shell",
+      "command": "stack build --fast",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "stack : build (watch)",
+      "type": "shell",
+      "command": "stack build --file-watch --haddock-deps --fast",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "stack : test",
+      "type": "shell",
+      "command": "stack test",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "problemMatcher": [
+        {
+          "owner": "hspec",
+          "fileLocation": [
+            "relative",
+            "${workspaceRoot}"
+          ],
+          "pattern": [
+            {
+              "regexp": "^\\s+(.*):(\\d+):",
+              "file": 1,
+              "line": 2
+            },
+            {
+              "regexp": "^\\s+\\d+\\)\\s+(.*)",
+              "message": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "stack : test (watch)",
+      "type": "shell",
+      "command": "stack test --file-watch --fast --haddock-deps",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "problemMatcher": [
+        {
+          "owner": "hspec",
+          "fileLocation": [
+            "relative",
+            "${workspaceRoot}"
+          ],
+          "pattern": [
+            {
+              "regexp": "^\\s+(.*):(\\d+):",
+              "file": 1,
+              "line": 2
+            },
+            {
+              "regexp": "^\\s+\\d+\\)\\s+(.*)",
+              "message": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "stack : hoogle (generate)",
+      "type": "shell",
+      "command": "stack hoogle -- generate --local"
+    },
+    {
+      "label": "stack : hoogle (server)",
+      "type": "shell",
+      "command": "stack hoogle -- server --local --port=8080"
+    }
+  ]
+}
